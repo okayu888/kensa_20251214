@@ -32,7 +32,13 @@ button {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 12px;            /* ボタン同士 */
 }
+
+.main-buttons {
+  margin-bottom: 24px; /* 上段と下段 */
+}
+
 
 /* 下剤・排便（大きい正方形） */
 .btn-large {
