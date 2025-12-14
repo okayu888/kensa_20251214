@@ -143,3 +143,27 @@ function renumberRows() {
     row.querySelector('.no').textContent = index + 1;
   });
 }
+
+// ===== スタッフ画面用：ダミー一覧 =====
+document.addEventListener('DOMContentLoaded', () => {
+  const table = document.querySelector('#logTable tbody');
+  if (!table) return; // 患者画面では何もしない
+
+  const dummyLogs = [
+    { time: '09:00', content: '💊 下剤(1)', note: '' },
+    { time: '09:20', content: '💩 排便(1)', note: '軟便' },
+    { time: '09:40', content: '⚠️ 腹痛(1)', note: '' },
+    { time: '10:00', content: '💊 下剤(2)', note: '' },
+  ];
+
+  dummyLogs.forEach((log, index) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${log.time}</td>
+      <td>${log.content}</td>
+      <td>${log.note}</td>
+    `;
+    table.appendChild(tr);
+  });
+});
