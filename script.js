@@ -67,7 +67,8 @@ function addStoolImage(imagePath) {
 /* =========================
    行追加
 ========================= */
-function addRow(type, laxative, other, note) {
+function addRow(type, laxativeText, contentText, note) {
+
   const tbody = document.querySelector('#logTable tbody');
   const tr = document.createElement('tr');
 
@@ -75,15 +76,16 @@ function addRow(type, laxative, other, note) {
   tr.dataset.type = type;
 
   tr.innerHTML = `
-    <td class="no"></td>
-    <td>${laxative}</td>
-    <td>${getTime()}</td>
-    <td>${other}</td>
-    <td>${note}</td>
-    <td>
-      <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
-    </td>
-  `;
+  <td class="no"></td>
+  <td>${laxativeText}</td>
+  <td>${getTime()}</td>
+  <td>${contentText}</td>
+  <td>${note}</td>
+  <td>
+    <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+  </td>
+`;
+
 
   // 新しい記録を上に追加
   tbody.prepend(tr);
@@ -157,25 +159,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!table) return; // 患者画面では何もしない
 
   const dummyLogs = [
-  { time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
-  { time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
-  { time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
-  { time: '20:03', content: '💊 下剤(7)', note: '' },
-  { time: '19:59', content: '💩 排便(5)', note: '軟便' },
+  { laxative: '', time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
+  { laxative: '', time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
+  { laxative: '', time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
+  { laxative: '💊 下剤(7)', time: '20:03', content: '', note: '' },
+  { laxative: '', time: '19:59', content: '💩 排便(5)', note: '軟便' },
 ];
+
 
 
   dummyLogs.forEach((log, index) => {
   const tr = document.createElement('tr');
   tr.innerHTML = `
-    <td>${index + 1}</td>
-    <td>${log.time}</td>
-    <td>${log.content}</td>
-    <td>${log.note}</td>
-    <td>
-      <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
-    </td>
-  `;
+  <td>${index + 1}</td>
+  <td>${log.laxative || ''}</td>
+  <td>${log.time}</td>
+  <td>${log.content}</td>
+  <td>${log.note}</td>
+  <td>
+    <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+  </td>
+`;
+
   table.appendChild(tr);
 });
 
