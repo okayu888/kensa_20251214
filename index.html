@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>検査記録アプリ</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,17 +11,17 @@
 <h1>検査記録</h1>
 
 
-<!-- ▼ メイン操作ボタン -->
-<div class="buttons">
-  <button onclick="addLaxative()">💊 下剤</button>
-  <button onclick="openStoolModal()">💩 排便</button>
+<!-- ▼ メイン操作ボタン（大きい） -->
+<div class="buttons main-buttons">
+  <button class="btn-large" onclick="addLaxative()">💊 下剤</button>
+  <button class="btn-large" onclick="openStoolModal()">💩 排便</button>
 </div>
 
-<!-- ▼ 具合不良ボタン -->
-<div class="buttons sub">
-  <button onclick="addSymptom('腹痛')">腹痛</button>
-  <button onclick="addSymptom('吐き気')">吐き気</button>
-  <button onclick="addSymptom('その他')">その他</button>
+<!-- ▼ 具合不良ボタン（小さめ） -->
+<div class="buttons sub-buttons">
+  <button class="btn-small" onclick="addSymptom('腹痛')">腹痛</button>
+  <button class="btn-small" onclick="addSymptom('吐き気')">吐き気</button>
+  <button class="btn-small" onclick="addSymptom('その他')">その他</button>
 </div>
 
 

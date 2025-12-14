@@ -26,6 +26,75 @@ button {
   border: 1px solid #ccc;
   cursor: pointer;
 }
+/* ===== 患者画面：操作ボタン調整 ===== */
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* 下剤・排便（大きい正方形） */
+.btn-large {
+  width: 120px;
+  height: 120px;
+  font-size: 18px;
+  border-radius: 16px;
+  padding: 0; /* 既存buttonのpaddingを上書き */
+  
+}
+
+/* 腹痛・吐き気・その他（少し小さめ） */
+.btn-small {
+  min-width: 100px;
+  height: 48px;
+  font-size: 16px;
+}
+
+/* =========================
+   タブレット（iPadなど）
+   ========================= */
+@media (max-width: 1024px) {
+
+  .btn-large {
+    width: 140px;
+    height: 140px;
+    font-size: 20px;
+  }
+
+  .btn-small {
+    min-width: 120px;
+    height: 56px;
+    font-size: 17px;
+  }
+}
+
+
+/* スマホ微調整 */
+@media (max-width: 480px) {
+
+  /* 下剤・排便（大きい正方形） */
+  .btn-large {
+    width: 140px;
+    height: 140px;
+    font-size: 22px;
+    padding: 0;              /* ← 重要 */
+    border-radius: 20px;
+  }
+
+  /* 腹痛・吐き気・その他（少し小さめ） */
+  .btn-small {
+    width: 120px;
+    height: 64px;
+    font-size: 18px;
+    padding: 0;              /* ← 重要 */
+    border-radius: 14px;
+  }
+}
+
+
+
+
 
 
 
