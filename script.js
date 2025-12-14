@@ -150,20 +150,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!table) return; // 患者画面では何もしない
 
   const dummyLogs = [
-    { time: '09:00', content: '💊 下剤(1)', note: '' },
-    { time: '09:20', content: '💩 排便(1)', note: '軟便' },
-    { time: '09:40', content: '⚠️ 腹痛(1)', note: '' },
-    { time: '10:00', content: '💊 下剤(2)', note: '' },
-  ];
+  { time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
+  { time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
+  { time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
+  { time: '20:03', content: '💊 下剤(7)', note: '' },
+  { time: '19:59', content: '💩 排便(5)', note: '軟便' },
+];
+
 
   dummyLogs.forEach((log, index) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${log.time}</td>
-      <td>${log.content}</td>
-      <td>${log.note}</td>
-    `;
-    table.appendChild(tr);
-  });
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>${index + 1}</td>
+    <td>${log.time}</td>
+    <td>${log.content}</td>
+    <td>${log.note}</td>
+    <td>
+      <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+    </td>
+  `;
+  table.appendChild(tr);
+});
+
 });
