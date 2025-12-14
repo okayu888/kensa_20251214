@@ -102,26 +102,29 @@ function deleteRow(button) {
 
 // 〇 を押したとき
 function confirmDelete() {
-  if (!targetDeleteRow) return;
+  if (targetDeleteRow) {
+    const type = targetDeleteRow.dataset.type;
 
-  const type = targetDeleteRow.dataset.type;
+    if (type === 'laxative' && laxativeCount > 0) {
+      laxativeCount--;
+    }
+    if (type === 'stool' && stoolCount > 0) {
+      stoolCount--;
+    }
+    if (type === 'symptom' && symptomGroupCount > 0) {
+      symptomGroupCount--;
+    }
 
-  if (type === 'laxative' && laxativeCount > 0) {
-    laxativeCount--;
+    targetDeleteRow.remove();
+    targetDeleteRow = null;
+
+    renumberRows();
   }
-  if (type === 'stool' && stoolCount > 0) {
-    stoolCount--;
-  }
-  if (type === 'symptom' && symptomGroupCount > 0) {
-    symptomGroupCount--;
-  }
 
-  targetDeleteRow.remove();
-  targetDeleteRow = null;
-
-  renumberRows();
+  // ★ 必ず「関数の中」で閉じる
   closeDeleteModal();
 }
+
 
 // × を押したとき
 function cancelDelete() {
@@ -140,9 +143,13 @@ function closeDeleteModal() {
 function renumberRows() {
   const rows = document.querySelectorAll('#logTable tbody tr');
   rows.forEach((row, index) => {
-    row.querySelector('.no').textContent = index + 1;
+    const noCell = row.querySelector('.no');
+    if (noCell) {
+      noCell.textContent = index + 1;
+    }
   });
 }
+
 
 // ===== スタッフ画面用：ダミー一覧 =====
 document.addEventListener('DOMContentLoaded', () => {
