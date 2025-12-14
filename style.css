@@ -1,0 +1,175 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.buttons.sub button {
+  background: #fff3f3;
+}
+
+button {
+  padding: 10px 16px;
+  margin: 6px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+th {
+  background: #f5f5f5;
+}
+
+/* ▼ モーダル */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background: white;
+  max-width: 400px;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stool-options button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+}
+
+.close {
+  margin-top: 10px;
+  background: #eee;
+}
+
+/* 削除ボタン用の見た目 */
+.delete-btn {
+  background: #ffecec;
+  border: 1px solid #e0a0a0;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.delete-btn:hover {
+  background: #ffcccc;
+}
+
+/* ===== ログイン画面 ===== */
+.login-box {
+  max-width: 360px;
+  margin: 60px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.login-title {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.login-box label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  font-size: 16px;
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.login-note {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ===== 便性状 画像選択 ===== */
+.stool-image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.stool-image-grid img {
+  width: 100%;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.stool-image-grid img:hover {
+  border-color: #4caf50;
+}
+
+/* ===== 削除確認モーダル ===== */
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.confirm-buttons button {
+  width: 80px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.confirm-buttons .ok {
+  background: #ffecec;
+  border: 1px solid #e0a0a0;
+}
+
+.confirm-buttons .ng {
+  background: #eee;
+  border: 1px solid #ccc;
+}
+

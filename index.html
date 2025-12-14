@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>検査記録アプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>検査記録</h1>
+
+<!-- ▼ メイン操作ボタン -->
+<div class="buttons">
+  <button onclick="addLaxative()">💊 下剤</button>
+  <button onclick="openStoolModal()">💩 排便</button>
+</div>
+
+<!-- ▼ 具合不良ボタン -->
+<div class="buttons sub">
+  <button onclick="addSymptom('腹痛')">腹痛</button>
+  <button onclick="addSymptom('吐き気')">吐き気</button>
+  <button onclick="addSymptom('その他')">その他</button>
+</div>
+
+<!-- ▼ ログテーブル -->
+<table id="logTable">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>💊 下剤</th>
+      <th>時間</th>
+      <th>💩 / ⚠️ 排便・具合不良</th>
+      <th>備考</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+<!-- ▼ 便性状ポップアップ -->
+<div id="stoolModal" class="modal">
+  <div class="modal-content">
+    <h2>便の形を選択してください</h2>
+
+    <div class="stool-image-grid">
+      <img src="images/ben1.jpg" alt="便1"
+     onclick="addStoolImage('images/ben1.jpg')">
+
+<img src="images/ben2.jpg" alt="便2"
+     onclick="addStoolImage('images/ben2.jpg')">
+
+<img src="images/ben3.jpg" alt="便3"
+     onclick="addStoolImage('images/ben3.jpg')">
+
+<img src="images/ben4.jpg" alt="便4"
+     onclick="addStoolImage('images/ben4.jpg')">
+
+<img src="images/ben5.jpg" alt="便5"
+     onclick="addStoolImage('images/ben5.jpg')">
+
+<img src="images/ben6.jpg" alt="便6"
+     onclick="addStoolImage('images/ben6.jpg')">
+
+    </div>
+
+    <button class="close" onclick="closeStoolModal()">キャンセル</button>
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+
+<!-- ▼ 削除確認モーダル -->
+<div id="deleteConfirmModal" class="modal">
+  <div class="modal-content">
+    <h2>この記録を削除しますか？</h2>
+
+    <div class="confirm-buttons">
+      <button class="ok" onclick="confirmDelete()">〇</button>
+      <button class="ng" onclick="cancelDelete()">×</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

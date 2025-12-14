@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ログイン｜検査記録アプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>検査記録アプリ</h1>
+
+<div class="login-box">
+  <p class="login-title">患者ログイン</p>
+
+  <!-- QRから来た想定 -->
+  <label>
+    患者ID
+    <input id="patientId" type="text" value="ABC123" readonly>
+  </label>
+
+  <label>
+    PINコード
+    <input id="pin" type="password" placeholder="4桁のPIN">
+  </label>
+
+  <button onclick="login()">ログイン</button>
+
+  <p class="login-note">
+    ※ 発表用デモのため、認証は簡略化しています
+  </p>
+</div>
+
+<script>
+  function login() {
+    const pin = document.getElementById('pin').value;
+
+    if (!pin) {
+      alert('PINを入力してください');
+      return;
+    }
+
+    // デモ用：ログイン情報を保存
+    localStorage.setItem('demoLogin', 'true');
+
+    // 検査ログ画面へ
+    window.location.href = 'index.html';
+  }
+</script>
+
+</body>
+</html>
