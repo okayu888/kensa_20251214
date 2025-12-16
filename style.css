@@ -252,3 +252,39 @@ th {
   border: 1px solid #ccc;
 }
 
+/* =========================
+   ボタン選択中の見た目
+   ========================= */
+
+/* 選択中（下剤・排便） */
+.btn-large.active {
+  background-color: #DFF5E6;  /* 少し濃い緑 */
+  border-color: #8bcfa8;
+}
+
+/* 選択中（腹痛・吐き気・その他） */
+.btn-small.active {
+  background-color: #FFE8B3;  /* 少し濃い黄色 */
+  border-color: #e0c36a;
+}
+
+/* =========================
+   押している間だけ色が変わる（最終版）
+========================= */
+
+/* 下剤・排便 */
+button.btn-large:active {
+  background-color: #DFF5E6;   /* ← 通常より濃い */
+  border-color: #8bcfa8;
+  transform: scale(0.97);
+}
+
+/* 腹痛・吐き気・その他 */
+button.btn-small:active {
+  background-color: #FFE8B3;   /* ← 通常より濃い */
+  border-color: #e0c36a;
+  transform: scale(0.97);
+}
+
+
+
