@@ -20,8 +20,13 @@ function openStoolModal() {
 }
 
 function closeStoolModal() {
-  document.getElementById('stoolModal').style.display = 'none';
+  const modal = document.getElementById('stoolModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
+
+
 
 /* =========================
    記録ボタン
@@ -61,8 +66,22 @@ function addStoolImage(imagePath) {
     imageHtml
   );
 
-  closeStoolModal();
+  // ★★★ ここを追加 ★★★
+  const modal = document.getElementById('stoolModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
+
+  
+
+// ★ ここで直接モーダルを閉じる（スコープ問題を回避）
+const modal = document.getElementById('stoolModal');
+if (modal) {
+  modal.style.display = 'none';
+}
+  
+
 
 /* =========================
    行追加
@@ -70,6 +89,7 @@ function addStoolImage(imagePath) {
 function addRow(type, laxativeText, contentText, note) {
 
   const tbody = document.querySelector('#logTable tbody');
+  if (!tbody) return; // ← ★ これを追加
   const tr = document.createElement('tr');
 
   // 種類を保存（削除時に使用）
