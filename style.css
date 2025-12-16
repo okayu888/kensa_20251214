@@ -47,6 +47,8 @@ button {
   font-size: 18px;
   border-radius: 16px;
   padding: 0; /* 既存buttonのpaddingを上書き */
+
+  background-color: #F3FFF6; /* ← 追加 ボタンの色*/
   
 }
 
@@ -55,6 +57,8 @@ button {
   min-width: 100px;
   height: 48px;
   font-size: 16px;
+
+  background-color: #FFF8E6; /* ← 追加 ボタンの色 */
 }
 
 /* =========================
