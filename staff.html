@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検査記録一覧（スタッフ用）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>検査記録一覧（スタッフ用）</h1>
+
+<!-- ★ ここに追加する -->
+<div class="exam-info">
+  <p><strong>検査ID：</strong> K-20251214-01</p>
+  <p><strong>検査時間：</strong> 09:00 〜 11:30</p>
+  <p><strong>薬の種類：</strong> ×××</p>
+</div>
+
+
+
+
+<table id="logTable">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>下剤</th>
+      <th>時間</th>
+      <th>内容</th>
+      <th>備考</th>
+      <th>削除</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- JSで追加 -->
+  </tbody>
+</table>
+
+<!-- 削除確認モーダル（スタッフ用） -->
+<div id="deleteConfirmModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <p>削除しますか？</p>
+
+    <!-- ★ ここを統一 -->
+    <div class="confirm-buttons">
+      <button class="ok" onclick="confirmDelete()">〇</button>
+      <button class="ng" onclick="cancelDelete()">×</button>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

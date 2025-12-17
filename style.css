@@ -26,6 +26,85 @@ button {
   border: 1px solid #ccc;
   cursor: pointer;
 }
+/* ===== 患者画面：操作ボタン調整 ===== */
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;            /* ボタン同士 */
+}
+
+.main-buttons {
+  margin-bottom: 24px; /* 上段と下段 */
+}
+
+
+/* 下剤・排便（大きい正方形） */
+.btn-large {
+  width: 120px;
+  height: 120px;
+  font-size: 18px;
+  border-radius: 16px;
+  padding: 0; /* 既存buttonのpaddingを上書き */
+
+  background-color: #F3FFF6; /* ← 追加 ボタンの色*/
+  
+}
+
+/* 腹痛・吐き気・その他（少し小さめ） */
+.btn-small {
+  min-width: 100px;
+  height: 48px;
+  font-size: 16px;
+
+  background-color: #FFF8E6; /* ← 追加 ボタンの色 */
+}
+
+/* =========================
+   タブレット（iPadなど）
+   ========================= */
+@media (max-width: 1024px) {
+
+  .btn-large {
+    width: 140px;
+    height: 140px;
+    font-size: 20px;
+  }
+
+  .btn-small {
+    min-width: 120px;
+    height: 56px;
+    font-size: 17px;
+  }
+}
+
+
+/* スマホ微調整 */
+@media (max-width: 480px) {
+
+  /* 下剤・排便（大きい正方形） */
+  .btn-large {
+    width: 140px;
+    height: 140px;
+    font-size: 22px;
+    padding: 0;              /* ← 重要 */
+    border-radius: 20px;
+  }
+
+  /* 腹痛・吐き気・その他（少し小さめ） */
+  .btn-small {
+    width: 120px;
+    height: 64px;
+    font-size: 18px;
+    padding: 0;              /* ← 重要 */
+    border-radius: 14px;
+  }
+}
+
+
+
+
 
 
 
@@ -163,13 +242,53 @@ th {
   cursor: pointer;
 }
 
+/* ===== 削除確認モーダル：ボタン色 ===== */
+
+/* 〇（削除OK）ボタン */
 .confirm-buttons .ok {
   background: #ffecec;
   border: 1px solid #e0a0a0;
 }
 
+/* ×（キャンセル）ボタン */
 .confirm-buttons .ng {
-  background: #eee;
+   background: #eee;
   border: 1px solid #ccc;
 }
+
+/* =========================
+   ボタン選択中の見た目
+   ========================= */
+
+/* 選択中（下剤・排便） */
+.btn-large.active {
+  background-color: #DFF5E6;  /* 少し濃い緑 */
+  border-color: #8bcfa8;
+}
+
+/* 選択中（腹痛・吐き気・その他） */
+.btn-small.active {
+  background-color: #FFE8B3;  /* 少し濃い黄色 */
+  border-color: #e0c36a;
+}
+
+/* =========================
+   押している間だけ色が変わる（最終版）
+========================= */
+
+/* 下剤・排便 */
+button.btn-large:active {
+  background-color: #DFF5E6;   /* ← 通常より濃い */
+  border-color: #8bcfa8;
+  transform: scale(0.97);
+}
+
+/* 腹痛・吐き気・その他 */
+button.btn-small:active {
+  background-color: #FFE8B3;   /* ← 通常より濃い */
+  border-color: #e0c36a;
+  transform: scale(0.97);
+}
+
+
 

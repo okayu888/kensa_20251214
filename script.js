@@ -20,8 +20,13 @@ function openStoolModal() {
 }
 
 function closeStoolModal() {
-  document.getElementById('stoolModal').style.display = 'none';
+  const modal = document.getElementById('stoolModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
+
+
 
 /* =========================
    記録ボタン
@@ -61,29 +66,46 @@ function addStoolImage(imagePath) {
     imageHtml
   );
 
-  closeStoolModal();
+  // ★★★ ここを追加 ★★★
+  const modal = document.getElementById('stoolModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
 }
+
+  
+
+// ★ ここで直接モーダルを閉じる（スコープ問題を回避）
+const modal = document.getElementById('stoolModal');
+if (modal) {
+  modal.style.display = 'none';
+}
+  
+
 
 /* =========================
    行追加
 ========================= */
-function addRow(type, laxative, other, note) {
+function addRow(type, laxativeText, contentText, note) {
+
   const tbody = document.querySelector('#logTable tbody');
+  if (!tbody) return; // ← ★ これを追加
   const tr = document.createElement('tr');
 
   // 種類を保存（削除時に使用）
   tr.dataset.type = type;
 
   tr.innerHTML = `
-    <td class="no"></td>
-    <td>${laxative}</td>
-    <td>${getTime()}</td>
-    <td>${other}</td>
-    <td>${note}</td>
-    <td>
-      <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
-    </td>
-  `;
+  <td class="no"></td>
+  <td>${laxativeText}</td>
+  <td>${getTime()}</td>
+  <td>${contentText}</td>
+  <td>${note}</td>
+  <td>
+    <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+  </td>
+`;
+
 
   // 新しい記録を上に追加
   tbody.prepend(tr);
@@ -102,26 +124,29 @@ function deleteRow(button) {
 
 // 〇 を押したとき
 function confirmDelete() {
-  if (!targetDeleteRow) return;
+  if (targetDeleteRow) {
+    const type = targetDeleteRow.dataset.type;
 
-  const type = targetDeleteRow.dataset.type;
+    if (type === 'laxative' && laxativeCount > 0) {
+      laxativeCount--;
+    }
+    if (type === 'stool' && stoolCount > 0) {
+      stoolCount--;
+    }
+    if (type === 'symptom' && symptomGroupCount > 0) {
+      symptomGroupCount--;
+    }
 
-  if (type === 'laxative' && laxativeCount > 0) {
-    laxativeCount--;
+    targetDeleteRow.remove();
+    targetDeleteRow = null;
+
+    renumberRows();
   }
-  if (type === 'stool' && stoolCount > 0) {
-    stoolCount--;
-  }
-  if (type === 'symptom' && symptomGroupCount > 0) {
-    symptomGroupCount--;
-  }
 
-  targetDeleteRow.remove();
-  targetDeleteRow = null;
-
-  renumberRows();
+  // ★ 必ず「関数の中」で閉じる
   closeDeleteModal();
 }
+
 
 // × を押したとき
 function cancelDelete() {
@@ -140,6 +165,45 @@ function closeDeleteModal() {
 function renumberRows() {
   const rows = document.querySelectorAll('#logTable tbody tr');
   rows.forEach((row, index) => {
-    row.querySelector('.no').textContent = index + 1;
+    const noCell = row.querySelector('.no');
+    if (noCell) {
+      noCell.textContent = index + 1;
+    }
   });
 }
+
+
+// ===== スタッフ画面用：ダミー一覧 =====
+document.addEventListener('DOMContentLoaded', () => {
+  const table = document.querySelector('#logTable tbody');
+  if (!table) return; // 患者画面では何もしない
+
+  const dummyLogs = [
+  { laxative: '', time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
+  { laxative: '', time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
+  { laxative: '', time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
+  { laxative: '💊 下剤(7)', time: '20:03', content: '', note: '' },
+  { laxative: '', time: '19:59', content: '💩 排便(5)', note: '<img src="images/ben5.jpg" style="width:40px; border-radius:4px;">' },
+];
+
+
+
+  dummyLogs.forEach((log, index) => {
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+  <td>${index + 1}</td>
+  <td>${log.laxative || ''}</td>
+  <td>${log.time}</td>
+  <td>${log.content}</td>
+  <td>${log.note}</td>
+  <td>
+    <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+  </td>
+`;
+
+  table.appendChild(tr);
+});
+
+});
+
+
