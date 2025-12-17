@@ -291,4 +291,9 @@ button.btn-small:active {
 }
 
 
+/* ===== 取消済み行 ===== */
+tr.cancelled {
+  background-color: #f0f0f0; /* 薄いグレー */
+  color: #666;
+}
 

@@ -124,28 +124,22 @@ function deleteRow(button) {
 
 // 〇 を押したとき
 function confirmDelete() {
-  if (targetDeleteRow) {
-    const type = targetDeleteRow.dataset.type;
+  if (!targetDeleteRow) return;
 
-    if (type === 'laxative' && laxativeCount > 0) {
-      laxativeCount--;
-    }
-    if (type === 'stool' && stoolCount > 0) {
-      stoolCount--;
-    }
-    if (type === 'symptom' && symptomGroupCount > 0) {
-      symptomGroupCount--;
-    }
+  // 行を「取消済み」にする
+  targetDeleteRow.classList.add('cancelled');
 
-    targetDeleteRow.remove();
-    targetDeleteRow = null;
-
-    renumberRows();
+  // 取消ボタンの表示を変更（🗑 → 取消）
+  const btn = targetDeleteRow.querySelector('.delete-btn');
+  if (btn) {
+    btn.textContent = '取消';
+    btn.disabled = true; // 二重取消防止（おすすめ）
   }
 
-  // ★ 必ず「関数の中」で閉じる
+  targetDeleteRow = null;
   closeDeleteModal();
 }
+
 
 
 // × を押したとき
