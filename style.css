@@ -301,3 +301,76 @@ tr.cancelled {
 tr.is-hidden {
   display: none;
 }
+
+/* ===== 検査一覧：カード表示 ===== */
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 横5人 */
+  gap: 16px;
+  margin-top: 20px;
+  max-height: 80vh;       /* 画面の8割 */
+  overflow-y: auto;       /* 縦スクロール */
+}
+
+/* テーブルをカード化 */
+.exam-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ヘッダは非表示（カードなので） */
+.exam-grid thead {
+  display: none;
+}
+
+/* 行をカード風に */
+.exam-grid tbody tr {
+  display: block;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+/* セルを縦並びに */
+.exam-grid tbody td {
+  display: block;
+  text-align: left;
+  border: none;
+  padding: 4px 0;
+}
+
+/* Noを強調 */
+.exam-grid tbody td:first-child {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.exam-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 横5人 */
+  gap: 16px;
+}
+
+/* 画面が狭ければ自動で減らす */
+@media (max-width: 1600px) {
+  .exam-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .exam-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.exam-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fff;
+  max-height: 70vh;        /* 1人分が縦に伸びすぎない */
+  overflow-y: auto;        /* 中だけスクロール */
+}
