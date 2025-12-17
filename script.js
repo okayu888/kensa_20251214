@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
   { laxative: '', time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
   { laxative: '', time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
   { laxative: '💊 下剤(7)', time: '20:03', content: '', note: '' },
-  { laxative: '', time: '19:59', content: '💩 排便(5)', note: '軟便' },
+  { laxative: '', time: '19:59', content: '💩 排便(5)', note: '<img src="images/ben5.jpg" style="width:40px; border-radius:4px;">' },
 ];
 
 
