@@ -297,3 +297,7 @@ tr.cancelled {
   color: #666;
 }
 
+/* 最新表示以外を隠す */
+tr.is-hidden {
+  display: none;
+}

@@ -110,6 +110,7 @@ function addRow(type, laxativeText, contentText, note) {
   // 新しい記録を上に追加
   tbody.prepend(tr);
   renumberRows();
+  applyLatestLimit(5); // ← 追加
 }
 
 /* =========================
@@ -173,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!table) return; // 患者画面では何もしない
 
   const dummyLogs = [
+  { laxative: '', time: '20:19', content: '⚠️ 吐き気(8)', note: '' },  
   { laxative: '', time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
   { laxative: '', time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
   { laxative: '', time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
@@ -198,6 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
   table.appendChild(tr);
 });
 
+applyLatestLimit(5); // ← ここに追加
 });
 
+function applyLatestLimit(limit = 5) {
+  const rows = document.querySelectorAll('#logTable tbody tr');
+
+  rows.forEach((row, index) => {
+    if (index >= limit) {
+      row.classList.add('is-hidden');
+    } else {
+      row.classList.remove('is-hidden');
+    }
+  });
+}
 
