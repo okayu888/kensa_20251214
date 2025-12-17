@@ -37,17 +37,20 @@
   </tbody>
 </table>
 
-<!-- 削除確認モーダル -->
+<!-- 削除確認モーダル（スタッフ用） -->
 <div id="deleteConfirmModal" class="modal" style="display:none;">
   <div class="modal-content">
     <p>削除しますか？</p>
 
-    <div class="modal-buttons">
-      <button onclick="confirmDelete()">〇</button>
-      <button onclick="cancelDelete()">×</button>
+    <!-- ★ ここを統一 -->
+    <div class="confirm-buttons">
+      <button class="ok" onclick="confirmDelete()">〇</button>
+      <button class="ng" onclick="cancelDelete()">×</button>
     </div>
+
   </div>
 </div>
+
 
 <script src="script.js"></script>
 </body>

@@ -242,13 +242,17 @@ th {
   cursor: pointer;
 }
 
+/* ===== 削除確認モーダル：ボタン色 ===== */
+
+/* 〇（削除OK）ボタン */
 .confirm-buttons .ok {
   background: #ffecec;
   border: 1px solid #e0a0a0;
 }
 
+/* ×（キャンセル）ボタン */
 .confirm-buttons .ng {
-  background: #eee;
+   background: #eee;
   border: 1px solid #ccc;
 }
 
