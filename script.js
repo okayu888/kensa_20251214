@@ -16,8 +16,10 @@ function getTime() {
    モーダル制御（便性状）
 ========================= */
 function openStoolModal() {
+  // loadStoolConditions(); // ← 追加
   document.getElementById('stoolModal').style.display = 'block';
 }
+
 
 function closeStoolModal() {
   const modal = document.getElementById('stoolModal');
@@ -200,12 +202,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-fetch("http://127.0.0.1:5000/api/exam-days")
-
+fetch("http://127.0.0.1:5000/api/stool-conditions")
   .then(res => res.json())
   .then(data => {
-    console.log("exam days:", data);
+    console.log("stool conditions:", data);
+    renderStoolImages(data);   // ← 次のステップで作る関数
   })
   .catch(err => console.error(err));
+
+console.log("script.js loaded");
+
+fetch("http://127.0.0.1:5000/health")
+  .then(res => res.json())
+  .then(data => {
+    console.log("API health:", data);
+  })
+  .catch(err => {
+    console.error("API接続エラー:", err);
+  });
 
 
