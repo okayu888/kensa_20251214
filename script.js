@@ -200,9 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-fetch("http://localhost:5000/health")
+fetch("http://127.0.0.1:5000/api/exam-days")
+
   .then(res => res.json())
-  .then(data => console.log("API response:", data))
+  .then(data => {
+    console.log("exam days:", data);
+  })
   .catch(err => console.error(err));
 
 
