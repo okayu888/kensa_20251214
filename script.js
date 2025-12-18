@@ -200,4 +200,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+fetch("http://localhost:5000/health")
+  .then(res => res.json())
+  .then(data => console.log("API response:", data))
+  .catch(err => console.error(err));
+
 
