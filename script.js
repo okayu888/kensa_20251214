@@ -37,8 +37,34 @@ function closeStoolModal() {
 // 下剤
 function addLaxative() {
   laxativeCount++;
-  addRow('laxative', `💊 下剤(${laxativeCount})`, '', '');
+
+  fetch("http://127.0.0.1:5000/api/exam-days/1/laxatives", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      dose_no: laxativeCount,          // ★ 必須
+      taken_at: new Date().toISOString(),
+      laxative_type_id: 1              // ★ ダミーでOK
+    })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("下剤POST失敗");
+    return res.json();
+  })
+  .then(() => {
+    alert("下剤の記録を保存しました");
+  })
+  .catch(err => {
+    console.error("下剤 保存エラー:", err);
+    alert("下剤の記録に失敗しました");
+  });
 }
+
+
+
+
 
 // 症状（腹痛・吐き気・その他は1グループ）
 function addSymptom(symptomName) {
@@ -206,7 +232,7 @@ fetch("http://127.0.0.1:5000/api/stool-conditions")
   .then(res => res.json())
   .then(data => {
     console.log("stool conditions:", data);
-    renderStoolImages(data);   // ← 次のステップで作る関数
+    // renderStoolImages(data);   // ← 次のステップで作る関数
   })
   .catch(err => console.error(err));
 
@@ -220,5 +246,7 @@ fetch("http://127.0.0.1:5000/health")
   .catch(err => {
     console.error("API接続エラー:", err);
   });
+
+
 
 
