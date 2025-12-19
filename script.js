@@ -1,3 +1,4 @@
+
 let laxativeCount = 0;
 let stoolCount = 0;
 let symptomGroupCount = 0;
@@ -94,20 +95,13 @@ function addStoolImage(imagePath) {
     imageHtml
   );
 
-  // ★★★ ここを追加 ★★★
   const modal = document.getElementById('stoolModal');
   if (modal) {
     modal.style.display = 'none';
   }
 }
 
-  
 
-// ★ ここで直接モーダルを閉じる（スコープ問題を回避）
-const modal = document.getElementById('stoolModal');
-if (modal) {
-  modal.style.display = 'none';
-}
   
 
 
