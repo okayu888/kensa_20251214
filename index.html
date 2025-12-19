@@ -30,18 +30,26 @@
 
 
 <!-- ▼ 便性状ポップアップ -->
-<div id="stoolModal" class="modal">
+<!-- 便性状ポップアップ -->
+<div id="stoolModal" class="modal" style="display:none;">
   <div class="modal-content">
     <h2>便の形を選択してください</h2>
 
-    <div class="stool-image-grid" id="stoolImageGrid">
-  <!-- JSで動的に入れる -->
-</div>
+    <div class="stool-image-grid">
+      <img src="images/lv1.png" alt="レベル1" onclick="addStoolImage('lv1')">
+      <img src="images/lv2.png" alt="レベル2" onclick="addStoolImage('lv2')">
+      <img src="images/lv3.png" alt="レベル3" onclick="addStoolImage('lv3')">
+      <img src="images/lv4.png" alt="レベル4" onclick="addStoolImage('lv4')">
+      <img src="images/lv5.png" alt="レベル5" onclick="addStoolImage('lv5')">
+      <img src="images/lv6.png" alt="レベル6" onclick="addStoolImage('lv6')">
 
 
-    <button class="close" onclick="closeStoolModal()">キャンセル</button>
+    <button onclick="closeStoolModal()">キャンセル</button>
   </div>
 </div>
+
+
+
 
 
 <script src="script.js"></script>
