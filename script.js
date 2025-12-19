@@ -54,11 +54,11 @@ function addLaxative() {
     return res.json();
   })
   .then(() => {
-    alert("下剤の記録を保存しました");
+    
   })
   .catch(err => {
     console.error("下剤 保存エラー:", err);
-    alert("下剤の記録に失敗しました");
+    
   });
 }
 
@@ -122,13 +122,37 @@ function addRow(type, laxativeText, contentText, note) {
 
   // 種類を保存（削除時に使用）
   tr.dataset.type = type;
-
+  
   tr.innerHTML = `
-  <td class="no"></td>
-  <td>${laxativeText}</td>
-  <td>${getTime()}</td>
-  <td>${contentText}</td>
-  <td>${note}</td>
+  <td>${index + 1}</td>
+
+  <!-- 下剤 -->
+  <td>
+    ${row.event_type === 'laxative'
+      ? `💊 下剤（${row.count_no}）`
+      : ''}
+  </td>
+
+  <!-- 時間 -->
+  <td>${row.recorded_at.slice(11, 16)}</td>
+
+  <!-- 内容（排便＋症状） -->
+  <td>
+    ${row.event_type === 'stool'
+      ? `💩 排便（${row.count_no}）`
+      : row.event_type === 'symptom'
+        ? `⚠️ ${row.event_name}（${row.count_no}）`
+        : ''}
+  </td>
+
+  <!-- 便の性状（排便のみ） -->
+  <td>
+    ${row.event_type === 'stool' && row.image_path
+      ? `<img src="http://127.0.0.1:5000/${row.image_path}"
+            alt="${row.label || ''}"
+            style="width:40px; border-radius:4px;">`
+    : ''}
+  </td>
   <td>
     <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
   </td>
@@ -195,38 +219,61 @@ function renumberRows() {
 }
 
 
-// ===== スタッフ画面用：ダミー一覧 =====
-document.addEventListener('DOMContentLoaded', () => {
-  const table = document.querySelector('#logTable tbody');
-  if (!table) return; // 患者画面では何もしない
+// ===== スタッフ画面用：DB一覧取得 =====
+async function loadStoolRecords() {
+  console.log("✅ loadStoolRecords が呼ばれました");
 
-  const dummyLogs = [
-  { laxative: '', time: '20:19', content: '⚠️ 吐き気(7)', note: '' },
-  { laxative: '', time: '20:19', content: '⚠️ 腹痛(6)', note: '' },
-  { laxative: '', time: '20:03', content: '⚠️ 腹痛(5)', note: '' },
-  { laxative: '💊 下剤(7)', time: '20:03', content: '', note: '' },
-  { laxative: '', time: '19:59', content: '💩 排便(5)', note: '<img src="images/ben5.jpg" style="width:40px; border-radius:4px;">' },
-];
+  const res = await fetch(
+    "http://127.0.0.1:5000/api/exam-days/1/bowel-movements"
+  );
+  const data = await res.json();
 
+  const tbody = document.querySelector("#logTable tbody");
+  if (!tbody) return;
 
+  tbody.innerHTML = "";
 
-  dummyLogs.forEach((log, index) => {
-  const tr = document.createElement('tr');
-  tr.innerHTML = `
+  data.slice().reverse().forEach((row, index) => {
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
   <td>${index + 1}</td>
-  <td>${log.laxative || ''}</td>
-  <td>${log.time}</td>
-  <td>${log.content}</td>
-  <td>${log.note}</td>
+  <td></td>
+  <td>${row.recorded_at.slice(11, 16)}</td>
+
+  <!-- 内容 -->
   <td>
-    <button class="delete-btn" onclick="deleteRow(this)">🗑</button>
+    ${row.image_path
+      ? `💩 排便（${data.length - index}）`
+      : `${row.label || ''}`
+    }
   </td>
+
+  <!-- 便の性状 -->
+  <td>
+    ${row.image_path ? `
+      <img src="http://127.0.0.1:5000/${row.image_path}"
+           alt="${row.label || ''}"
+           style="width:40px; border-radius:4px;">
+    ` : ''}
+  </td>
+
+  <!-- 取消 -->
+  <td><button class="delete-btn" onclick="deleteRow(this)">🗑</button></td>
 `;
 
-  table.appendChild(tr);
+    tbody.appendChild(tr);
+  });
+}
+
+
+// ===== スタッフ画面：ページ表示時にDB一覧を取得 =====
+document.addEventListener("DOMContentLoaded", () => {
+  loadStoolRecords();
 });
 
-});
+
+
 
 fetch("http://127.0.0.1:5000/api/stool-conditions")
   .then(res => res.json())
@@ -246,6 +293,7 @@ fetch("http://127.0.0.1:5000/health")
   .catch(err => {
     console.error("API接続エラー:", err);
   });
+
 
 
 
